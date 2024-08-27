@@ -1,8 +1,25 @@
-# React + Vite
+# Инструкция по использованию приложения
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Инструкции по запуску в терминале
 
-Currently, two official plugins are available:
+1. Клонируйте репозиторий с помощью команды:
+   ```bash
+   git clone https://github.com/OmgDie/hubex
+   ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. Перейдите в директорию проекта:
+   ```bash
+   cd hubex
+   ```
+
+3. Установите зависимости:
+   ```bash
+   npm install
+   ```
+   
+4. Откройте окно терминала и запустите клиентскую часть приложения с помощью команды:
+   ```bash
+   npm run dev
+   ```
+
+Приложение будет доступно для использования по адресу `http://127.0.0.1:5173/`.
