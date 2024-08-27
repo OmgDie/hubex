@@ -41,6 +41,10 @@ const FormWrapper = styled.form`
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   font-size: 0.875rem;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const FieldWrapper = styled.div`
@@ -48,10 +52,6 @@ const FieldWrapper = styled.div`
   flex-direction: column;
   font-size: 0.875rem;
   margin: 0px 0px 1rem;
-`;
-
-const Label = styled.label`
-  margin-bottom: 8px;
 `;
 
 const StyledInput = styled.input`
@@ -83,6 +83,10 @@ const Error = styled.span`
 
 const FullWidthField = styled.div`
   grid-column: span 2;
+
+  @media (max-width: 600px) {
+    grid-column: span 1;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -90,6 +94,12 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 600px) {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 const Button = styled.button`
@@ -99,12 +109,26 @@ const Button = styled.button`
   background-color: #007bff;
   color: white;
   cursor: pointer;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    margin-top: 10px;
+  }
 `;
 
 const LinkText = styled.span`
-  margin-right: 10px;
-  font-weight: 500;
+  font-weight: 400;
   color: rgb(30, 32, 34);
+  font-size: 14px;
+  line-height: 20px;
+  display: inline-block;
+  width: calc(100% - 100px);
+
+  @media (max-width: 600px) {
+    margin-right: 0;
+    display: block;
+    width: 100%;
+  }
 `;
 
 const Link = styled.a`
