@@ -10,6 +10,8 @@ const GlobalStyles = css`
   html {
     font-size: 1rem;
     font-family: 'Inter, sans-serif';
+    font-weight: 400;
+    line-height: 1.57;
   }
 
   * {

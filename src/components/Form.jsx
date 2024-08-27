@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, Form } from 'react-final-form';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { validateEmail } from '../utils/validate';
 
 const Container = styled.div`
@@ -10,16 +11,29 @@ const Container = styled.div`
   font-family: 'Inter, sans-serif';
   color: rgb(30, 32, 34);
   font-weight: 700;
+  @media (max-width: 640px) {
+    padding: 10px;
+  }
 `;
 
 const TextDescription = styled.p`
-  font-size: 0.875rem;
   font-weight: 500;
+  line-height: 1.57;
   color: rgb(103, 119, 136);
 `;
 
 const StyledHeadline = styled.div`
   font-size: 1.25rem;
+  margin: 0px 0px 0.35em;
+  font-weight: 700;
+  line-height: 1.6;
+`;
+
+const Divider = styled.div`
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.12);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;
 
 const FormWrapper = styled.form`
@@ -32,27 +46,39 @@ const FormWrapper = styled.form`
 const FieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  font-size: 0.875rem;
+  margin: 0px 0px 1rem;
 `;
 
 const Label = styled.label`
   margin-bottom: 8px;
 `;
 
-const Input = styled(Field)`
+const StyledInput = styled.input`
   padding: 16.5px 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+  ${props =>
+    props.error &&
+    css`
+      border-color: red;
+    `}
 `;
 
-const TextArea = styled(Field)`
+const StyledTextArea = styled.textarea`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   height: 100px;
   resize: none;
+`;
+
+const Error = styled.span`
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
 `;
 
 const FullWidthField = styled.div`
@@ -77,7 +103,6 @@ const Button = styled.button`
 
 const LinkText = styled.span`
   margin-right: 10px;
-
   font-weight: 500;
   color: rgb(30, 32, 34);
 `;
@@ -98,9 +123,6 @@ const validate = values => {
   if (!values.name) {
     errors.name = 'Please specify your first name';
   }
-  if (!values.bio) {
-    errors.bio = 'Required';
-  }
   if (!values.country) {
     errors.country = 'Please specify your country name';
   }
@@ -113,6 +135,20 @@ const validate = values => {
   return errors;
 };
 
+const CustomInput = ({ input, meta, ...rest }) => (
+  <FieldWrapper>
+    <StyledInput {...input} {...rest} error={meta.error && meta.touched} />
+    {meta.error && meta.touched && <Error>{meta.error}</Error>}
+  </FieldWrapper>
+);
+
+const CustomTextArea = ({ input, meta, ...rest }) => (
+  <FieldWrapper>
+    <StyledTextArea {...input} {...rest} />
+    {meta.error && meta.touched && <Error>{meta.error}</Error>}
+  </FieldWrapper>
+);
+
 const MyForm = ({ onSubmit }) => (
   <Container>
     <StyledHeadline>Change your private information</StyledHeadline>
@@ -120,38 +156,59 @@ const MyForm = ({ onSubmit }) => (
       Please read our <Link href="https://www.google.com">terms of use</Link> to
       be informed how we manage your private data.
     </TextDescription>
+    <Divider />
     <Form
       onSubmit={onSubmit}
       validate={validate}
       render={({ handleSubmit }) => (
         <FormWrapper onSubmit={handleSubmit}>
-          <FieldWrapper>
-            <Label htmlFor="name">Enter your first name</Label>
-            <Input name="name" component="input" placeholder="First name *" />
-          </FieldWrapper>
-          <FieldWrapper>
-            <Label htmlFor="email">Enter your email</Label>
-            <Input name="email" component="input" placeholder="Email *" />
-          </FieldWrapper>
+          <Field
+            name="name"
+            render={({ input, meta }) => (
+              <CustomInput
+                input={input}
+                meta={meta}
+                placeholder="First name *"
+              />
+            )}
+          />
+          <Field
+            name="email"
+            render={({ input, meta }) => (
+              <CustomInput input={input} meta={meta} placeholder="Email *" />
+            )}
+          />
           <FullWidthField>
-            <FieldWrapper>
-              <Label htmlFor="bio">Bio</Label>
-              <TextArea name="bio" component="textarea" placeholder="Bio" />
-            </FieldWrapper>
+            <Field
+              name="bio"
+              render={({ input, meta }) => (
+                <CustomTextArea input={input} meta={meta} placeholder="Bio" />
+              )}
+            />
           </FullWidthField>
-          <FieldWrapper>
-            <Label htmlFor="country">Country</Label>
-            <Input name="country" component="input" placeholder="Country *" />
-          </FieldWrapper>
-          <FieldWrapper>
-            <Label htmlFor="city">City</Label>
-            <Input name="city" component="input" placeholder="City *" />
-          </FieldWrapper>
+          <Field
+            name="country"
+            render={({ input, meta }) => (
+              <CustomInput input={input} meta={meta} placeholder="Country *" />
+            )}
+          />
+          <Field
+            name="city"
+            render={({ input, meta }) => (
+              <CustomInput input={input} meta={meta} placeholder="City *" />
+            )}
+          />
           <FullWidthField>
-            <FieldWrapper>
-              <Label htmlFor="address">Enter your address</Label>
-              <Input name="address" component="input" placeholder="Address *" />
-            </FieldWrapper>
+            <Field
+              name="address"
+              render={({ input, meta }) => (
+                <CustomInput
+                  input={input}
+                  meta={meta}
+                  placeholder="Address *"
+                />
+              )}
+            />
           </FullWidthField>
           <ButtonWrapper>
             <LinkText>
