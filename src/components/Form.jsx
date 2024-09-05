@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, Form } from 'react-final-form';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { validateEmail } from '../utils/validate';
+import { validateFormValues } from '../utils/validate';
 
 const Container = styled.div`
   max-width: 800px;
@@ -139,26 +139,6 @@ const Link = styled.a`
   }
 `;
 
-const validate = values => {
-  const errors = {};
-  if (!values.email || !validateEmail(values.email)) {
-    errors.email = 'Invalid email address';
-  }
-  if (!values.name) {
-    errors.name = 'Please specify your first name';
-  }
-  if (!values.country) {
-    errors.country = 'Please specify your country name';
-  }
-  if (!values.city) {
-    errors.city = 'Please specify your city name';
-  }
-  if (!values.address) {
-    errors.address = 'Please specify your address';
-  }
-  return errors;
-};
-
 const CustomInput = ({ input, meta, ...rest }) => (
   <FieldWrapper>
     <StyledInput {...input} {...rest} error={meta.error && meta.touched} />
@@ -183,7 +163,7 @@ const MyForm = ({ onSubmit }) => (
     <Divider />
     <Form
       onSubmit={onSubmit}
-      validate={validate}
+      validate={validateFormValues}
       render={({ handleSubmit }) => (
         <FormWrapper onSubmit={handleSubmit}>
           <Field

@@ -25,7 +25,7 @@ const ModalContent = styled.div`
 `;
 
 const Input = styled.input`
-  padding: 10px;
+  padding: 5px;
   margin-bottom: 10px;
   width: 100%;
   border: 1px solid #ccc;
@@ -62,7 +62,7 @@ const Modal = ({ isOpen, onClose, onSend }) => {
           onChange={e => setEmail(e.target.value)}
           required
         />
-        <Button onClick={handleSend}>Send</Button>
+        <Button onClick={() => handleSend()}>Send</Button>
       </ModalContent>
     </ModalWrapper>
   );

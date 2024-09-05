@@ -6,13 +6,13 @@ function* sendEmail(action) {
   try {
     const result = yield call(
       emailjs.send,
-      'YOUR_SERVICE_ID',
-      'YOUR_TEMPLATE_ID',
+      import.meta.env.VITE_EMAILJS_SERVICE_ID, // ur service_id from EmailJS
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID, // ur Template_id from EmailJS
       {
         ...action.payload,
         send_time: new Date().toLocaleString(),
       },
-      'YOUR_USER_ID',
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY, // ur Public_key from EmailJS
     );
     console.log(result);
   } catch (error) {

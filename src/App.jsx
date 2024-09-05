@@ -18,7 +18,7 @@ const App = () => {
     const dataToSend = {
       ...formData,
       send_time: new Date().toLocaleString(),
-      email,
+      recipient_email: email,
     };
     dispatch(saveFormData(dataToSend));
   };
